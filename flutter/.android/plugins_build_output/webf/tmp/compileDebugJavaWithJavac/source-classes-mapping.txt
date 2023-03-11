@@ -1,0 +1,6 @@
+com/openwebf/webf/BuildConfig.java
+ com.openwebf.webf.BuildConfig
+com/openwebf/webf/WebF.java
+ com.openwebf.webf.WebF
+com/openwebf/webf/WebFPlugin.java
+ com.openwebf.webf.WebFPlugin

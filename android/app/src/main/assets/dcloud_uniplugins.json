@@ -1,0 +1,14 @@
+{
+  "nativePlugins": [
+    {
+      "hooksClass": "com.itfenbao.android.flutter.plugin.SnFlutterProxy",
+      "plugins": [
+        {
+          "type": "module",
+          "name": "sn-flutter",
+          "class": "com.itfenbao.android.flutter.plugin.SnFlutterModule"
+        }
+      ]
+    }
+  ]
+}
