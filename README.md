@@ -12,3 +12,7 @@
 android
 
 <img decoding="async" src="https://oss.tian-qi.wang/downloads/demo.png" width="200px">
+
+## B站系列视频
+
+* [uni-app集成Flutter最佳实战-Android](https://www.bilibili.com/video/BV1XP411f7GQ/)
