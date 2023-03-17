@@ -1,0 +1,6 @@
+framework module sn_flutter {
+  umbrella header "sn_flutter-umbrella.h"
+
+  export *
+  module * { export * }
+}

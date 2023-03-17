@@ -401,10 +401,10 @@ packages:
     dependency: "direct main"
     description:
       name: webf
-      sha256: d453b97eb3082e6c76bf6aa4c4244bebe368aba5f27c667a5bed67e84ab539f8
+      sha256: "1eb8fc1bdb158092aa7efbdc97be47f8ee2e9458b60007067e86e17f3ef041c0"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.14.0-beta.3"
+    version: "0.14.0-beta.4"
   webf_websocket:
     dependency: "direct main"
     description:

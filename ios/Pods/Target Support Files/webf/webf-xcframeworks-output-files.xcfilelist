@@ -1,0 +1,2 @@
+${PODS_XCFRAMEWORKS_BUILD_DIR}/webf/quickjs.framework
+${PODS_XCFRAMEWORKS_BUILD_DIR}/webf/webf_bridge.framework

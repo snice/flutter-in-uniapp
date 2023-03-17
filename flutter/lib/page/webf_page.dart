@@ -34,16 +34,23 @@ class WebFApp extends StatelessWidget {
           .setDecisionHandler((WebFNavigationAction action) async {
         if (action.source == null) return WebFNavigationActionPolicy.cancel;
         Uri uri = Uri.parse(action.source!);
-        String scheme = "${uri.scheme}://";
-        String basePath = action.source!.replaceFirst(scheme, "");
+        String scheme = "${uri.scheme}:///";
         String name = "";
-        if (['./', '../', '/']
-            .any((element) => action.target.startsWith(element))) {
-          basePath = basePath.substring(0, basePath.lastIndexOf("/"));
-          name = p.normalize(basePath + action.target);
+        if (uri.scheme == 'http' ||
+            uri.scheme == 'https' ||
+            uri.scheme == 'assets') {
+          name = action.target;
         } else {
-          basePath = basePath.substring(0, basePath.lastIndexOf("www/static"));
-          name = p.normalize(basePath + "www/static/" + action.target);
+          String basePath = action.source!.replaceFirst(scheme, "");
+          if (['./', '../', '/']
+              .any((element) => action.target.startsWith(element))) {
+            basePath = basePath.substring(0, basePath.lastIndexOf("/"));
+            name = p.normalize(basePath + action.target);
+          } else {
+            basePath =
+                basePath.substring(0, basePath.lastIndexOf("www/static"));
+            name = p.normalize(basePath + "www/static/" + action.target);
+          }
         }
         Navigator.push(context, buildPage("$scheme$name"));
         return WebFNavigationActionPolicy.allow;

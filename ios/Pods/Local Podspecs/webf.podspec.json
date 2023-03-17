@@ -1,0 +1,33 @@
+{
+  "name": "webf",
+  "version": "0.1.0",
+  "summary": "A W3C standard compliant Web rendering engine based on Flutter.",
+  "description": "A W3C standard compliant Web rendering engine based on Flutter.",
+  "homepage": "https://openwebf.com",
+  "license": {
+    "file": "../LICENSE"
+  },
+  "authors": {
+    "OpenWebF": "dongtiangche@outlook.com"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": "Classes/**/*",
+  "public_header_files": "Classes/**/*.h",
+  "dependencies": {
+    "Flutter": [
+
+    ]
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "prepare_command": "bash prepare.sh",
+  "vendored_frameworks": "Frameworks/*.xcframework",
+  "resources": "Frameworks/*.*",
+  "pod_target_xcconfig": {
+    "DEFINES_MODULE": "YES",
+    "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+  }
+}

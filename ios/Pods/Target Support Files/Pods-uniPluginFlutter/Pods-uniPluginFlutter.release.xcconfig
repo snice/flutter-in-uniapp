@@ -1,0 +1,18 @@
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/FlutterPluginRegistrant" "${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift" "${PODS_CONFIGURATION_BUILD_DIR}/connectivity_plus" "${PODS_CONFIGURATION_BUILD_DIR}/shared_preferences_foundation" "${PODS_CONFIGURATION_BUILD_DIR}/sn_flutter" "${PODS_CONFIGURATION_BUILD_DIR}/webf" "${PODS_ROOT}/../../flutter/.ios/.symlinks/plugins/webf/ios/Frameworks" "${PODS_XCFRAMEWORKS_BUILD_DIR}/webf"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/FlutterPluginRegistrant/FlutterPluginRegistrant.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift/Reachability.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/connectivity_plus/connectivity_plus.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/shared_preferences_foundation/shared_preferences_foundation.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/sn_flutter/sn_flutter.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/webf/webf.framework/Headers"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) /usr/lib/swift '@executable_path/Frameworks' '@loader_path/Frameworks'
+LIBRARY_SEARCH_PATHS = $(inherited) "${DT_TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}" /usr/lib/swift $(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)/ $(SDKROOT)/usr/lib/swift
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_CONFIGURATION_BUILD_DIR}/FlutterPluginRegistrant/FlutterPluginRegistrant.framework/Headers" -isystem "${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift/Reachability.framework/Headers" -isystem "${PODS_CONFIGURATION_BUILD_DIR}/connectivity_plus/connectivity_plus.framework/Headers" -isystem "${PODS_CONFIGURATION_BUILD_DIR}/shared_preferences_foundation/shared_preferences_foundation.framework/Headers" -isystem "${PODS_CONFIGURATION_BUILD_DIR}/sn_flutter/sn_flutter.framework/Headers" -isystem "${PODS_CONFIGURATION_BUILD_DIR}/webf/webf.framework/Headers" -iframework "${PODS_CONFIGURATION_BUILD_DIR}/FlutterPluginRegistrant" -iframework "${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift" -iframework "${PODS_CONFIGURATION_BUILD_DIR}/connectivity_plus" -iframework "${PODS_CONFIGURATION_BUILD_DIR}/shared_preferences_foundation" -iframework "${PODS_CONFIGURATION_BUILD_DIR}/sn_flutter" -iframework "${PODS_ROOT}/../../flutter/.ios/.symlinks/plugins/webf/ios/Frameworks" -iframework "${PODS_XCFRAMEWORKS_BUILD_DIR}/webf" -iframework "${PODS_CONFIGURATION_BUILD_DIR}/webf" -fno-objc-msgsend-selector-stubs
+OTHER_CPPFLAGS = -fno-objc-msgsend-selector-stubs
+OTHER_LDFLAGS = $(inherited) -ObjC -framework "CoreTelephony" -framework "FlutterPluginRegistrant" -framework "Reachability" -framework "SystemConfiguration" -framework "connectivity_plus" -framework "quickjs" -framework "shared_preferences_foundation" -framework "sn_flutter" -framework "webf" -framework "webf_bridge"
+OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods
+PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
+USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../SDK/inc/**"
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES

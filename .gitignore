@@ -4,7 +4,10 @@
 build/
 *.iml
 local.properties
+plugins_build_output
 # ios
+SDK
+.symlinks
 # flutter
 .DS_Store
 .dart_tool/
@@ -170,5 +173,5 @@ dist
 
 uniapp/unpackage/dist
 uniapp/unpackage/resources
-
+.hbuilderx
 .DS_Store
