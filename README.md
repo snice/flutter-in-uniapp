@@ -16,3 +16,4 @@ android
 ## B站系列视频
 
 * [uni-app集成Flutter最佳实战-Android](https://www.bilibili.com/video/BV1XP411f7GQ/)
+* [uni-app集成Flutter最佳实战-iOS](https://www.bilibili.com/video/BV1t24y1x7cQ/)
