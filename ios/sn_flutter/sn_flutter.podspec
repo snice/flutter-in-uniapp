@@ -36,9 +36,7 @@ TODO: Add long description of the pod here.
 
   s.static_framework = true
   s.xcconfig         = {
-      'USER_HEADER_SEARCH_PATHS' => [
-          '"$(SRCROOT)/../../SDK/inc/**"'
-      ],
+      'USER_HEADER_SEARCH_PATHS' => '"$(SRCROOT)/../../SDK/inc/**"',
       'OTHER_CFLAGS' => '-fno-objc-msgsend-selector-stubs',
       'OTHER_CPPFLAGS' => '-fno-objc-msgsend-selector-stubs'
   }

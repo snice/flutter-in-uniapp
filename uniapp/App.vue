@@ -1,6 +1,7 @@
 <script>
 	export default {
 		onLaunch: function() {
+			uni.$flutter = uni.requireNativePlugin('sn-flutter')
 			console.log('App Launch')
 		},
 		onShow: function() {

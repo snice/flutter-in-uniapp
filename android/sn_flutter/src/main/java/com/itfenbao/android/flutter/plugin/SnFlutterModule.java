@@ -18,21 +18,61 @@ import java.util.Random;
 import io.dcloud.feature.uniapp.annotation.UniJSMethod;
 import io.dcloud.feature.uniapp.bridge.UniJSCallback;
 import io.dcloud.feature.uniapp.common.UniModule;
-import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngineCache;
 
 public class SnFlutterModule extends UniModule {
 
+    /**
+     * 打开webf页面
+     *
+     * @param json
+     */
     @UniJSMethod
-    public void openFlutter() {
-        try {
-//            Intent intent = FlutterActivity.createDefaultIntent(mUniSDKInstance.getContext());
-            Uri uri = mUniSDKInstance.rewriteUri(Uri.parse("/static/webf.html"), URIAdapter.FILE);
-            Intent intent = FlutterActivity.withNewEngine().initialRoute(uri.toString()).build(mUniSDKInstance.getContext());
-            mUniSDKInstance.getContext().startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void openWebf(JSONObject json) {
+        JSONObject params = new JSONObject();
+        if (json.containsKey(FlutterConstants.CACHE_ID)) {
+            String cacheId = json.getString(FlutterConstants.CACHE_ID);
+            params.put(FlutterConstants.CACHE_ID, cacheId);
         }
+        if (json.containsKey("url")) {
+            String url = json.getString("url");
+            Uri uri = mUniSDKInstance.rewriteUri(Uri.parse(url), URIAdapter.FILE);
+            params.put(SnFlutterPage.INITIAL_ROUTE, uri.toString());
+        }
+        openPage(params);
+    }
+
+    /**
+     * 打开flutter页面
+     *
+     * @param params
+     */
+    @UniJSMethod
+    public void openPage(final JSONObject params) {
+        Context context = mUniSDKInstance.getContext();
+        final Bundle bundle = new Bundle();
+        if (params.containsKey(FlutterConstants.CACHE_ID)) {
+            String cacheId = params.getString(FlutterConstants.CACHE_ID);
+            bundle.putString(FlutterConstants.CACHE_ID, cacheId);
+            bundle.putString("cached_engine_id", cacheId);
+        }
+        if (params.containsKey(FlutterConstants.INSTANCE_ID))
+            bundle.putString(FlutterConstants.INSTANCE_ID, params.getString(FlutterConstants.INSTANCE_ID));
+
+        if (params.containsKey("id"))
+            bundle.putString(SnFlutterPage.ENTRY_POINT, params.getString("id"));
+        if (params.containsKey(SnFlutterPage.ENTRY_POINT))
+            bundle.putString(SnFlutterPage.ENTRY_POINT, params.getString(SnFlutterPage.ENTRY_POINT));
+
+        if (params.containsKey(SnFlutterPage.INITIAL_ROUTE))
+            bundle.putString(SnFlutterPage.INITIAL_ROUTE, params.getString(SnFlutterPage.INITIAL_ROUTE));
+        if (params.containsKey(SnFlutterPage.DESTROY_AFTER_BACK))
+            bundle.putBoolean(SnFlutterPage.DESTROY_AFTER_BACK, params.getBoolean(SnFlutterPage.DESTROY_AFTER_BACK));
+        if (params.containsKey(SnFlutterPage.PARAMS))
+            bundle.putBundle(SnFlutterPage.PARAMS, UniUtils.parseFromJson(params.getJSONObject(SnFlutterPage.PARAMS)));
+        context.startActivity(new Intent(context, SnFlutterPage.class) {{
+            putExtras(bundle);
+        }});
     }
 
     @UniJSMethod
@@ -41,7 +81,7 @@ public class SnFlutterModule extends UniModule {
         for (int i = 0; i < pages.size(); i++) {
             final String page = pages.getString(i);
             if (!FlutterEngineCache.getInstance().contains(page))
-                FlutterEngineCache.getInstance().put(page, SnFlutterProxy.getInstance().createEngine(page));
+                FlutterEngineCache.getInstance().put(page, SnFlutterProxy.getInstance().createEngine(page, null));
         }
     }
 
@@ -49,31 +89,8 @@ public class SnFlutterModule extends UniModule {
     public void cacheEntryPoints(final JSONObject params) {
         for (String key : params.keySet()) {
             if (!FlutterEngineCache.getInstance().contains(key))
-                FlutterEngineCache.getInstance().put(key, SnFlutterProxy.getInstance().createEngine(params.getString(key)));
+                FlutterEngineCache.getInstance().put(key, SnFlutterProxy.getInstance().createEngine(params.getString(key), null));
         }
-    }
-
-    @UniJSMethod
-    public void openPage(final JSONObject params) {
-        Context context = mUniSDKInstance.getContext();
-        final Bundle bundle = new Bundle();
-        if (params.containsKey("id"))
-            bundle.putString(SnFlutterPage.ENTRY_POINT, params.getString("id"));
-        if (params.containsKey(FlutterConstants.CACHE_ID)) {
-            bundle.putString(FlutterConstants.CACHE_ID, params.getString(FlutterConstants.CACHE_ID));
-            bundle.putString("cached_engine_id", params.getString(FlutterConstants.CACHE_ID));
-        }
-        if (params.containsKey(FlutterConstants.INSTANCE_ID))
-            bundle.putString(FlutterConstants.INSTANCE_ID, params.getString(FlutterConstants.INSTANCE_ID));
-        if (params.containsKey(SnFlutterPage.ENTRY_POINT))
-            bundle.putString(SnFlutterPage.ENTRY_POINT, params.getString(SnFlutterPage.ENTRY_POINT));
-        if (params.containsKey(SnFlutterPage.DESTROY_AFTER_BACK))
-            bundle.putBoolean(SnFlutterPage.DESTROY_AFTER_BACK, params.getBoolean(SnFlutterPage.DESTROY_AFTER_BACK));
-        if (params.containsKey(SnFlutterPage.PARAMS))
-            bundle.putBundle(SnFlutterPage.PARAMS, UniUtils.parseFromJson(params.getJSONObject(SnFlutterPage.PARAMS)));
-        context.startActivity(new Intent(context, SnFlutterPage.class) {{
-            putExtras(bundle);
-        }});
     }
 
     @UniJSMethod

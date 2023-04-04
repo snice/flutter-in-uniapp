@@ -1,0 +1,37 @@
+<template>
+	<view class="content">
+		<button type="default" @click="openWebf">打开webf</button>
+		<button type="default" @click="navigateFlutter">内嵌Flutter </button>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {};
+		},
+		onLoad() {},
+		methods: {
+			openWebf() {
+				const flutter = uni.requireNativePlugin('sn-flutter');
+				flutter.openWebf({
+					url: '/static/demos/gallery/build/kraken/index.js'
+				});
+			},
+			navigateFlutter() {
+				uni.navigateTo({
+					url: '/pages/flutter/flutter'
+				})
+			}
+		}
+	};
+</script>
+
+<style>
+	.content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+</style>

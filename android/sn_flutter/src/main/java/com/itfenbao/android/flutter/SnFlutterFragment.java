@@ -1,10 +1,8 @@
 package com.itfenbao.android.flutter;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.itfenbao.android.flutter.plugin.SnFlutterProxy;
 
@@ -32,6 +30,8 @@ public class SnFlutterFragment extends FlutterFragment implements IMessage, Meth
     private String instanceId;
     private String cacheId;
     private String entryPoint = "main";
+
+    private String initialRoute;
     private boolean destroyAfterBack = true;
     private Map<String, Object> initParams = new HashMap();
     private MethodChannel methodChannel;
@@ -49,18 +49,16 @@ public class SnFlutterFragment extends FlutterFragment implements IMessage, Meth
         this.instanceId = instanceId;
     }
 
+    public void setInitialRoute(String initialRoute) {
+        this.initialRoute = initialRoute;
+    }
+
     public void setDestroyAfterBack(boolean destroyAfterBack) {
         this.destroyAfterBack = destroyAfterBack;
     }
 
     public void setInitParams(Map<String, Object> initParams) {
         this.initParams = initParams;
-    }
-
-    @Nullable
-    @Override
-    public FlutterEngine provideFlutterEngine(@NonNull Context context) {
-        return super.provideFlutterEngine(context);
     }
 
     @Override
@@ -83,10 +81,10 @@ public class SnFlutterFragment extends FlutterFragment implements IMessage, Meth
             methodChannel = null;
         }
         super.onDestroy();
-        if (this.destroyAfterBack) {
+        if (this.destroyAfterBack && !TextUtils.isEmpty(cacheId)) {
             if (FlutterEngineCache.getInstance().contains(cacheId))
                 FlutterEngineCache.getInstance().remove(cacheId);
-            FlutterEngineCache.getInstance().put(cacheId, SnFlutterProxy.getInstance().createEngine(entryPoint));
+            FlutterEngineCache.getInstance().put(cacheId, SnFlutterProxy.getInstance().createEngine(entryPoint, initialRoute));
         }
     }
 
@@ -104,11 +102,13 @@ public class SnFlutterFragment extends FlutterFragment implements IMessage, Meth
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
         if (FlutterConstants.Methods.CAN_POP.equals(call.method)) {
-            setCanPopResult((boolean) call.arguments());
+            setCanPopResult(call.arguments());
+            result.success(true);
             return;
         }
         if (FlutterConstants.Methods.POP.equals(call.method)) {
             this.fireEvent(Events.POP, null);
+            result.success(true);
             return;
         }
         if (FlutterConstants.Methods.GET_PARAMS.equals(call.method)) {
@@ -116,8 +116,8 @@ public class SnFlutterFragment extends FlutterFragment implements IMessage, Meth
             return;
         }
         if (FlutterConstants.Methods.CALL_BACK_METHOD.equals(call.method)) {
-            if (call.arguments != null)
-                UniUtils.invokeCallback(call.arguments);
+            if (call.arguments != null) UniUtils.invokeCallback(call.arguments);
+            result.success(true);
             return;
         }
         UniUtils.fireGlobalEventCallback(FlutterConstants.FLUTTER_MESSAGE + "&" + instanceId, call, result);
@@ -130,8 +130,7 @@ public class SnFlutterFragment extends FlutterFragment implements IMessage, Meth
     }
 
     private void fireEvent(String eventName, Map<String, Object> data) {
-        if (fireEvent != null)
-            fireEvent.fireEvent(eventName, data);
+        if (fireEvent != null) fireEvent.fireEvent(eventName, data);
     }
 
     private Map newParams(Map detail) {

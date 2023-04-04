@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>拖放排序</title>
+	<style>
+		ul {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+			width: 300px;
+			background-color: #f1f1f1;
+			border: 1px solid #ccc;
+		}
+		li {
+			padding: 10px;
+			margin: 10px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			cursor: move;
+			transition: transform 250ms ease-in-out;
+		}
+		li.dragging {
+			transform: scale(1.1);
+			z-index: 1;
+		}
+	</style>
+</head>
+<body>
+	<h2>拖放排序</h2>
+	<p>拖动列表项以进行排序。</p>
+	<ul id="sortable">
+		<li>列表项 1</li>
+		<li>列表项 2</li>
+		<li>列表项 3</li>
+		<li>列表项 4</li>
+		<li>列表项 5</li>
+	</ul>
+
+	<script>
+		var sortable = document.getElementById("sortable");
+		var touchItem = null;
+		var touchStartY = 0;
+		var touchCurrentY = 0;
+
+		sortable.addEventListener("touchstart", function(event) {
+			touchItem = event.target;
+			touchStartY = event.touches[0].clientY;
+			touchItem.classList.add("dragging");
+		});
+
+		sortable.addEventListener("touchmove", function(event) {
+			touchCurrentY = event.touches[0].clientY;
+			event.preventDefault();
+			event.stopPropagation();
+			var dropItem = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY);
+
+			if (dropItem && dropItem.nodeName === "LI" && dropItem !== touchItem) {
+				var boundingClientRect = dropItem.getBoundingClientRect();
+				var offset = boundingClientRect.y + (boundingClientRect.height / 2);
+				if (touchCurrentY > offset) {
+					dropItem.parentNode.insertBefore(touchItem, dropItem.nextElementSibling);
+				} else {
+					dropItem.parentNode.insertBefore(touchItem, dropItem);
+				}
+			}
+		});
+
+		sortable.addEventListener("touchend", function(event) {
+			touchItem.classList.remove("dragging");
+			touchItem = null;
+			touchStartY = 0;
+			touchCurrentY = 0;
+		});
+	</script>
+</body>
+</html>

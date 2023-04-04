@@ -22,9 +22,7 @@
   "source_files": "sn_flutter/Classes/**/*",
   "static_framework": true,
   "xcconfig": {
-    "USER_HEADER_SEARCH_PATHS": [
-      "\"$(SRCROOT)/../../SDK/inc/**\""
-    ],
+    "USER_HEADER_SEARCH_PATHS": "\"$(SRCROOT)/../../SDK/inc/**\"",
     "OTHER_CFLAGS": "-fno-objc-msgsend-selector-stubs",
     "OTHER_CPPFLAGS": "-fno-objc-msgsend-selector-stubs"
   },
