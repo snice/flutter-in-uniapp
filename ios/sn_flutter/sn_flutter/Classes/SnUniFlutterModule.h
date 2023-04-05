@@ -1,11 +1,12 @@
 //
 //  SnUniFlutterModule.h
-//  sn_flutter
+//  sn-flutter
 //
-//  Created by itfenbao on 2023/3/17.
+//  Created by itfenbao on 2021/2/25.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "Flutter/Flutter.h"
 #import "DCUniModule.h"
 
 NS_ASSUME_NONNULL_BEGIN

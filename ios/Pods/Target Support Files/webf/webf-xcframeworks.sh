@@ -23,11 +23,11 @@ variant_for_slice()
   "quickjs.xcframework/ios-arm64_x86_64-simulator")
     echo "simulator"
     ;;
-  "webf_bridge.xcframework/ios-arm64_x86_64-simulator")
-    echo "simulator"
-    ;;
   "webf_bridge.xcframework/ios-arm64_armv7_armv7s")
     echo ""
+    ;;
+  "webf_bridge.xcframework/ios-arm64_x86_64-simulator")
+    echo "simulator"
     ;;
   esac
 }
@@ -41,11 +41,11 @@ archs_for_slice()
   "quickjs.xcframework/ios-arm64_x86_64-simulator")
     echo "arm64 x86_64"
     ;;
-  "webf_bridge.xcframework/ios-arm64_x86_64-simulator")
-    echo "arm64 x86_64"
-    ;;
   "webf_bridge.xcframework/ios-arm64_armv7_armv7s")
     echo "arm64 armv7 armv7s"
+    ;;
+  "webf_bridge.xcframework/ios-arm64_x86_64-simulator")
+    echo "arm64 x86_64"
     ;;
   esac
 }
@@ -130,5 +130,5 @@ install_xcframework() {
 }
 
 install_xcframework "${PODS_ROOT}/../../flutter/.ios/.symlinks/plugins/webf/ios/Frameworks/quickjs.xcframework" "webf" "framework" "ios-arm64_armv7_armv7s" "ios-arm64_x86_64-simulator"
-install_xcframework "${PODS_ROOT}/../../flutter/.ios/.symlinks/plugins/webf/ios/Frameworks/webf_bridge.xcframework" "webf" "framework" "ios-arm64_x86_64-simulator" "ios-arm64_armv7_armv7s"
+install_xcframework "${PODS_ROOT}/../../flutter/.ios/.symlinks/plugins/webf/ios/Frameworks/webf_bridge.xcframework" "webf" "framework" "ios-arm64_armv7_armv7s" "ios-arm64_x86_64-simulator"
 

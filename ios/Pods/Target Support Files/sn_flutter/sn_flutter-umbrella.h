@@ -10,7 +10,14 @@
 #endif
 #endif
 
+#import "SnUniFlutterComponent.h"
+#import "SnUniFlutterConstants.h"
 #import "SnUniFlutterModule.h"
+#import "SnUniFlutterMsgProtocol.h"
+#import "SnUniFlutterProxy.h"
+#import "SnUniFlutterProxy_Internal.h"
+#import "SnUniFlutterViewController.h"
+#import "SnUniMsgDispatcher.h"
 
 FOUNDATION_EXPORT double sn_flutterVersionNumber;
 FOUNDATION_EXPORT const unsigned char sn_flutterVersionString[];

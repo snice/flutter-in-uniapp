@@ -608,21 +608,29 @@ WindSDK.xcframework</string>
 	<true/>
 	<key>dcloud_uniplugins</key>
 	<array>
-		<dict>
-			<key>hooksClass</key>
-			<string>DCRichAlertProxy</string>
-			<key>plugins</key>
-			<array>
-				<dict>
-					<key>class</key>
-					<string>SnUniFlutterModule</string>
-					<key>name</key>
-					<string>sn-flutter</string>
-					<key>type</key>
-					<string>module</string>
-				</dict>
-			</array>
-		</dict>
+        <dict>
+            <key>hooksClass</key>
+            <string>SnUniFlutterProxy</string>
+            <key>plugins</key>
+            <array>
+                <dict>
+                    <key>class</key>
+                    <string>SnUniFlutterModule</string>
+                    <key>name</key>
+                    <string>sn-flutter</string>
+                    <key>type</key>
+                    <string>module</string>
+                </dict>
+                <dict>
+                    <key>class</key>
+                    <string>SnUniFlutterComponent</string>
+                    <key>name</key>
+                    <string>sn-flutter-view</string>
+                    <key>type</key>
+                    <string>component</string>
+                </dict>
+            </array>
+        </dict>
 	</array>
 	<key>getui</key>
 	<dict>

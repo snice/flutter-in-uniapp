@@ -29,19 +29,15 @@ class UniappMethodChannel {
     isInit = true;
     _channel = MethodChannel(_CHANNEL_NAME);
     _channel.setMethodCallHandler((MethodCall call) async {
-      if (call.method == "canPop") {
-        sendCanPop();
-      } else {
-        if (_methodHandlers.containsKey(call.method)) {
-          if (call.arguments != null) {
-            Function.apply(_methodHandlers[call.method] as Function,
-                [Map<String, dynamic>.from(call.arguments)]);
-          } else {
-            Function.apply(_methodHandlers[call.method] as Function, []);
-          }
+      if (_methodHandlers.containsKey(call.method)) {
+        if (call.arguments != null) {
+          Function.apply(_methodHandlers[call.method] as Function,
+              [Map<String, dynamic>.from(call.arguments)]);
         } else {
-          throw Exception('not implemented ${call.method}');
+          Function.apply(_methodHandlers[call.method] as Function, []);
         }
+      } else {
+        throw Exception('not implemented ${call.method}');
       }
     });
   }
@@ -51,25 +47,12 @@ class UniappMethodChannel {
     _sh = MediaQuery.of(context).padding.top;
   }
 
-  void sendCanPop() {
-      fireEvent("canPop", canPop());
-  }
-
-  bool canPop() {
-    if(_context == null) return false;
-    try {
-      return Navigator.canPop(_context!);
-    } catch(e) {
-      return false;
-    }
+  void sendCanPop(bool canPop) {
+    fireEvent("canPop", canPop);
   }
 
   void pop() {
-    if (canPop()) {
-      Navigator.maybePop(_context!);
-    } else {
-      fireEvent("pop");
-    }
+    fireEvent("pop");
   }
 
   ///
