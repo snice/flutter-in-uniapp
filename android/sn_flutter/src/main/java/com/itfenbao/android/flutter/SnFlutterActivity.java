@@ -12,6 +12,7 @@ import com.itfenbao.android.flutter.plugin.SnFlutterProxy;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.flutter.Log;
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.FlutterEngineCache;
@@ -19,7 +20,7 @@ import io.flutter.embedding.engine.plugins.util.GeneratedPluginRegister;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 
-public class SnFlutterPage extends FlutterActivity implements IMessage, MethodChannel.MethodCallHandler {
+public class SnFlutterActivity extends FlutterActivity implements IMessage, MethodChannel.MethodCallHandler {
 
     public static final String ENTRY_POINT = "entryPoint";
     public static final String INITIAL_ROUTE = "initialRoute";
@@ -89,6 +90,7 @@ public class SnFlutterPage extends FlutterActivity implements IMessage, MethodCh
 
     @Override
     public void onMethodCall(@NonNull final MethodCall call, @NonNull MethodChannel.Result result) {
+        Log.d("Page", "onMethodCall:" + call.method + "," + call.arguments());
         if (FlutterConstants.Methods.CAN_POP.equals(call.method)) {
             result.success(true);
             return;

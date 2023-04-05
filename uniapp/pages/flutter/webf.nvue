@@ -9,11 +9,12 @@
 	} from '@/js_sdk/flutter/flutter.js';
 	export default {
 		data() {
+			const url = plus.io.convertLocalFileSystemURL('/static/demos/gallery/build/kraken/index.js')
 			return {
 				canPop: false,
-				instanceId: 'main',
-				entryPoint: 'main',
-				initialRoute: '/',
+				instanceId: 'webf',
+				entryPoint: 'webf',
+				initialRoute: `file://${url}`,
 				params: {
 					a: 1
 				}

@@ -1,8 +1,7 @@
-package com.itfenbao.android.flutter;
+package com.itfenbao.android.flutter.plugin;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -10,6 +9,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.alibaba.fastjson.JSON;
+import com.itfenbao.android.flutter.FlutterConstants;
+import com.itfenbao.android.flutter.SnFlutterFragment;
 import com.taobao.weex.common.Destroyable;
 
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import io.dcloud.feature.uniapp.ui.component.UniComponentProp;
 import io.flutter.embedding.android.FlutterFragment;
 import io.flutter.embedding.engine.FlutterEngineCache;
 
-public class FlutterComponent extends UniComponent<FrameLayout> implements Destroyable, SnFlutterFragment.UniComponentFireEvent {
+public class SnFlutterComponent extends UniComponent<FrameLayout> implements Destroyable, SnFlutterFragment.UniComponentFireEvent {
 
     private static final String ENTRY_POINT = "entryPoint";
     private static final String INITIAL_ROUTE = "initialRoute";
@@ -41,12 +42,12 @@ public class FlutterComponent extends UniComponent<FrameLayout> implements Destr
 
     private SnFlutterFragment mFragment;
 
-    public FlutterComponent(UniSDKInstance instance, AbsVContainer parent, int type, AbsComponentData componentData) {
+    public SnFlutterComponent(UniSDKInstance instance, AbsVContainer parent, int type, AbsComponentData componentData) {
         super(instance, parent, type, componentData);
         init(componentData.getAttrs());
     }
 
-    public FlutterComponent(UniSDKInstance instance, AbsVContainer parent, AbsComponentData componentData) {
+    public SnFlutterComponent(UniSDKInstance instance, AbsVContainer parent, AbsComponentData componentData) {
         super(instance, parent, componentData);
         init(componentData.getAttrs());
     }
@@ -75,14 +76,16 @@ public class FlutterComponent extends UniComponent<FrameLayout> implements Destr
 
     @Override
     protected FrameLayout initComponentHostView(@NonNull Context context) {
-        return new FrameLayout(context) {{
-            setId(View.generateViewId());
-        }};
+        return new FrameLayout(context);
     }
 
     @Override
     protected void onHostViewInitialized(FrameLayout host) {
         super.onHostViewInitialized(host);
+        initFlutter(host.getId());
+    }
+
+    private void initFlutter(int viewId) {
         if (!TextUtils.isEmpty(cacheId) && FlutterEngineCache.getInstance().get(cacheId) != null) {
             mFragment = new FlutterFragment.CachedEngineFragmentBuilder(SnFlutterFragment.class, cacheId).build();
         } else {
@@ -96,7 +99,7 @@ public class FlutterComponent extends UniComponent<FrameLayout> implements Destr
         mFragment.setFireEvent(this);
         FragmentActivity fragmentActivity = (FragmentActivity) getInstance().getContext();
         FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(getHostView().getId(), mFragment).commit();
+        fragmentManager.beginTransaction().add(viewId, mFragment).commit();
     }
 
     @UniComponentProp(name = DESTROY_AFTER_BACK)

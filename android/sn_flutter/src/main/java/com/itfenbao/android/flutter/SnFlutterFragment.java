@@ -9,6 +9,7 @@ import com.itfenbao.android.flutter.plugin.SnFlutterProxy;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.flutter.Log;
 import io.flutter.embedding.android.FlutterFragment;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.FlutterEngineCache;
@@ -101,6 +102,7 @@ public class SnFlutterFragment extends FlutterFragment implements IMessage, Meth
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
+        Log.d("Fragment", "onMethodCall:" + call.method + "," + call.arguments());
         if (FlutterConstants.Methods.CAN_POP.equals(call.method)) {
             setCanPopResult(call.arguments());
             result.success(true);

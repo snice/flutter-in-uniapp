@@ -8,13 +8,20 @@ class GLObserver extends NavigatorObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
     super.didPush(route, previousRoute);
-    uniapp.sendCanPop();
+    _sendCanPop();
   }
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    print("pop:${route.settings.toString()}");
     super.didPop(route, previousRoute);
-    uniapp.sendCanPop();
+    _sendCanPop();
   }
+
+  void _sendCanPop() {
+    // 防止太快，导致返回多次
+    Future.delayed(const Duration(microseconds: 50), () {
+      uniapp.sendCanPop();
+    });
+  }
+
 }

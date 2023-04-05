@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.itfenbao.android.flutter.FlutterConstants;
 import com.itfenbao.android.flutter.MsgDispatcher;
-import com.itfenbao.android.flutter.SnFlutterPage;
+import com.itfenbao.android.flutter.SnFlutterActivity;
 import com.itfenbao.android.flutter.UniUtils;
 import com.taobao.weex.adapter.URIAdapter;
 
@@ -29,17 +29,13 @@ public class SnFlutterModule extends UniModule {
      */
     @UniJSMethod
     public void openWebf(JSONObject json) {
-        JSONObject params = new JSONObject();
-        if (json.containsKey(FlutterConstants.CACHE_ID)) {
-            String cacheId = json.getString(FlutterConstants.CACHE_ID);
-            params.put(FlutterConstants.CACHE_ID, cacheId);
-        }
+        JSONObject params = new JSONObject(json);
         if (json.containsKey("url")) {
             String url = json.getString("url");
             Uri uri = mUniSDKInstance.rewriteUri(Uri.parse(url), URIAdapter.FILE);
-            params.put(SnFlutterPage.INITIAL_ROUTE, uri.toString());
+            params.put(SnFlutterActivity.INITIAL_ROUTE, uri.toString());
         }
-        openPage(params);
+        openFlutter(params);
     }
 
     /**
@@ -48,7 +44,7 @@ public class SnFlutterModule extends UniModule {
      * @param params
      */
     @UniJSMethod
-    public void openPage(final JSONObject params) {
+    public void openFlutter(final JSONObject params) {
         Context context = mUniSDKInstance.getContext();
         final Bundle bundle = new Bundle();
         if (params.containsKey(FlutterConstants.CACHE_ID)) {
@@ -58,19 +54,15 @@ public class SnFlutterModule extends UniModule {
         }
         if (params.containsKey(FlutterConstants.INSTANCE_ID))
             bundle.putString(FlutterConstants.INSTANCE_ID, params.getString(FlutterConstants.INSTANCE_ID));
-
-        if (params.containsKey("id"))
-            bundle.putString(SnFlutterPage.ENTRY_POINT, params.getString("id"));
-        if (params.containsKey(SnFlutterPage.ENTRY_POINT))
-            bundle.putString(SnFlutterPage.ENTRY_POINT, params.getString(SnFlutterPage.ENTRY_POINT));
-
-        if (params.containsKey(SnFlutterPage.INITIAL_ROUTE))
-            bundle.putString(SnFlutterPage.INITIAL_ROUTE, params.getString(SnFlutterPage.INITIAL_ROUTE));
-        if (params.containsKey(SnFlutterPage.DESTROY_AFTER_BACK))
-            bundle.putBoolean(SnFlutterPage.DESTROY_AFTER_BACK, params.getBoolean(SnFlutterPage.DESTROY_AFTER_BACK));
-        if (params.containsKey(SnFlutterPage.PARAMS))
-            bundle.putBundle(SnFlutterPage.PARAMS, UniUtils.parseFromJson(params.getJSONObject(SnFlutterPage.PARAMS)));
-        context.startActivity(new Intent(context, SnFlutterPage.class) {{
+        if (params.containsKey(SnFlutterActivity.ENTRY_POINT))
+            bundle.putString(SnFlutterActivity.ENTRY_POINT, params.getString(SnFlutterActivity.ENTRY_POINT));
+        if (params.containsKey(SnFlutterActivity.INITIAL_ROUTE))
+            bundle.putString(SnFlutterActivity.INITIAL_ROUTE, params.getString(SnFlutterActivity.INITIAL_ROUTE));
+        if (params.containsKey(SnFlutterActivity.DESTROY_AFTER_BACK))
+            bundle.putBoolean(SnFlutterActivity.DESTROY_AFTER_BACK, params.getBoolean(SnFlutterActivity.DESTROY_AFTER_BACK));
+        if (params.containsKey(SnFlutterActivity.PARAMS))
+            bundle.putBundle(SnFlutterActivity.PARAMS, UniUtils.parseFromJson(params.getJSONObject(SnFlutterActivity.PARAMS)));
+        context.startActivity(new Intent(context, SnFlutterActivity.class) {{
             putExtras(bundle);
         }});
     }

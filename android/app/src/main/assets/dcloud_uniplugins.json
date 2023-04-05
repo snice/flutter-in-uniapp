@@ -11,7 +11,7 @@
         {
           "type": "component",
           "name": "sn-flutter-view",
-          "class": "com.itfenbao.android.flutter.FlutterComponent"
+          "class": "com.itfenbao.android.flutter.plugin.SnFlutterComponent"
         }
       ]
     }

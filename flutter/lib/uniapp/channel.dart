@@ -64,16 +64,13 @@ class UniappMethodChannel {
     }
   }
 
-  // void pop() {
-  //   if (canPop()) {
-  //     Navigator.maybePop(_context!);
-  //     Future.delayed(const Duration(milliseconds: 20), () {
-  //       sendCanPop();
-  //     });
-  //   } else {
-  //     fireEvent("pop");
-  //   }
-  // }
+  void pop() {
+    if (canPop()) {
+      Navigator.maybePop(_context!);
+    } else {
+      fireEvent("pop");
+    }
+  }
 
   ///
   /// 监听uniapp事件

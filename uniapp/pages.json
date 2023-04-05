@@ -10,7 +10,11 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
-
+		}, {
+			"path": "pages/flutter/webf",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {

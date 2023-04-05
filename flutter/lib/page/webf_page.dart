@@ -17,11 +17,8 @@ class WebFApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     uniapp.initChannel();
-    return MaterialApp(
+    return CupertinoApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: const Scaffold(body: Center(child: Text("hello, Flutter."))),
       navigatorObservers: [GLObserver()],
       onGenerateRoute: (RouteSettings settings) {
@@ -31,7 +28,7 @@ class WebFApp extends StatelessWidget {
   }
 
   PageRoute buildPage(RouteSettings settings) {
-    String name = settings.name ?? "";
+    String url = settings.name ?? "";
     return CupertinoPageRoute(
         settings: settings,
         builder: (BuildContext context) {
@@ -48,7 +45,7 @@ class WebFApp extends StatelessWidget {
                   navigationDelegate: createNavigationDelegate(context),
                   viewportWidth: viewportSize.width - queryData.padding.horizontal,
                   viewportHeight: viewportSize.height, //- queryData.padding.vertical,
-                  bundle: WebFBundle.fromUrl(name), // The page entry point
+                  bundle: WebFBundle.fromUrl(url), // The page entry point
                 ),
               ],
             ),
@@ -58,6 +55,9 @@ class WebFApp extends StatelessWidget {
 
   WebFNavigationDelegate createNavigationDelegate(BuildContext context) {
     WebFNavigationDelegate navigationDelegate = WebFNavigationDelegate();
+    navigationDelegate.errorHandler = (error, task) {
+      print(error);
+    };
     navigationDelegate.setDecisionHandler((WebFNavigationAction action) async {
       if (action.source == null) return WebFNavigationActionPolicy.cancel;
       Uri uri = Uri.parse(action.source!);
@@ -77,7 +77,9 @@ class WebFApp extends StatelessWidget {
           name = p.normalize(basePath + "www/static/" + action.target);
         }
       }
-      Navigator.push(context, buildPage(RouteSettings(name: "$scheme$name", arguments: null)));
+      String fullPath = "$scheme$name";
+      print("webf push:$fullPath");
+      Navigator.push(context, buildPage(RouteSettings(name: fullPath, arguments: null)));
       return WebFNavigationActionPolicy.allow;
     });
     return navigationDelegate;
