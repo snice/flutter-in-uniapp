@@ -15,7 +15,7 @@ PODS:
   - sn_flutter (0.1.0):
     - Flutter
     - FlutterPluginRegistrant
-  - webf (0.1.0):
+  - webf (0.14.0):
     - Flutter
 
 DEPENDENCIES:
@@ -51,8 +51,8 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
   sn_flutter: 235716eea93c1dee379cf314f487081f5e63e66b
-  webf: 543ebcea706f49d90801d036509d347aa8838b50
+  webf: 904888515f25428e7f769866541e3c453da9cbee
 
 PODFILE CHECKSUM: ea647137ceadcbc95aa66a2e1887898b04dddfed
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.12.1

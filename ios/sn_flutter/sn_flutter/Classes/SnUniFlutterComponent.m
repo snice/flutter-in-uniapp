@@ -93,6 +93,7 @@
 
     __weak typeof(self) weakself = self;
     [channel setMethodCallHandler:^(FlutterMethodCall *_Nonnull call, FlutterResult _Nonnull result) {
+        NSLog([[NSString alloc] initWithFormat:@"component:%@, %@", call.method, call.arguments]);
         if ([CAN_POP isEqualToString:call.method]) {
             BOOL pop = [call.arguments boolValue];
             [weakself fireEvent:POP_CHANGE params:@{@"detail": @{@"pop": @(pop)}}];

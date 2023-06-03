@@ -18,7 +18,7 @@ description: A new Flutter module project.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.4 <3.0.0'
+  sdk: '>=2.19.2 <3.0.0'
 
 dependencies:
   flutter:
@@ -27,7 +27,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  webf: ^0.14.0-beta.7+1
+  webf: ^0.14.0
   webf_websocket: ^1.2.0
   path: ^1.8.2
 

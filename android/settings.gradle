@@ -1,10 +1,12 @@
 include ':app'
 
-// flutter android module
-setBinding(new Binding([gradle: this]))
-evaluate(new File(settingsDir, '../flutter/.android/include_flutter.groovy'))
-include ':libflutter'
-project(':libflutter').projectDir = new File('../flutter')
+if (isOfflinePkg.toBoolean() == false) {
+    // flutter android module
+    setBinding(new Binding([gradle: this]))
+    evaluate(new File(settingsDir, '../flutter/.android/include_flutter.groovy'))
+    include ':libflutter'
+    project(':libflutter').projectDir = new File('../flutter')
 
-// uniapp 插件
-include ':sn_flutter'
+    // uniapp 插件
+    include ':sn_flutter'
+}

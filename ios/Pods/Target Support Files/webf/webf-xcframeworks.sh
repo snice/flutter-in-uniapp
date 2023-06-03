@@ -17,13 +17,13 @@ RSYNC_PROTECT_TMP_FILES=(--filter "P .*.??????")
 variant_for_slice()
 {
   case "$1" in
-  "quickjs.xcframework/ios-arm64_armv7_armv7s")
+  "quickjs.xcframework/ios-arm64")
     echo ""
     ;;
   "quickjs.xcframework/ios-arm64_x86_64-simulator")
     echo "simulator"
     ;;
-  "webf_bridge.xcframework/ios-arm64_armv7_armv7s")
+  "webf_bridge.xcframework/ios-arm64")
     echo ""
     ;;
   "webf_bridge.xcframework/ios-arm64_x86_64-simulator")
@@ -35,14 +35,14 @@ variant_for_slice()
 archs_for_slice()
 {
   case "$1" in
-  "quickjs.xcframework/ios-arm64_armv7_armv7s")
-    echo "arm64 armv7 armv7s"
+  "quickjs.xcframework/ios-arm64")
+    echo "arm64"
     ;;
   "quickjs.xcframework/ios-arm64_x86_64-simulator")
     echo "arm64 x86_64"
     ;;
-  "webf_bridge.xcframework/ios-arm64_armv7_armv7s")
-    echo "arm64 armv7 armv7s"
+  "webf_bridge.xcframework/ios-arm64")
+    echo "arm64"
     ;;
   "webf_bridge.xcframework/ios-arm64_x86_64-simulator")
     echo "arm64 x86_64"
@@ -129,6 +129,6 @@ install_xcframework() {
   echo "Copied $source to $destination"
 }
 
-install_xcframework "${PODS_ROOT}/../../flutter/.ios/.symlinks/plugins/webf/ios/Frameworks/quickjs.xcframework" "webf" "framework" "ios-arm64_armv7_armv7s" "ios-arm64_x86_64-simulator"
-install_xcframework "${PODS_ROOT}/../../flutter/.ios/.symlinks/plugins/webf/ios/Frameworks/webf_bridge.xcframework" "webf" "framework" "ios-arm64_armv7_armv7s" "ios-arm64_x86_64-simulator"
+install_xcframework "${PODS_ROOT}/../../flutter/.ios/.symlinks/plugins/webf/ios/Frameworks/quickjs.xcframework" "webf" "framework" "ios-arm64" "ios-arm64_x86_64-simulator"
+install_xcframework "${PODS_ROOT}/../../flutter/.ios/.symlinks/plugins/webf/ios/Frameworks/webf_bridge.xcframework" "webf" "framework" "ios-arm64" "ios-arm64_x86_64-simulator"
 

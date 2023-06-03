@@ -1238,7 +1238,7 @@
 				CODE_SIGN_ENTITLEMENTS = HBuilder/HBuilder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_TEAM = 8L6XJA6966;
+				DEVELOPMENT_TEAM = 74MNRFPA4K;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1260,7 +1260,7 @@
 				);
 				INFOPLIST_FILE = "HBuilder-Hello/uniPluginFlutter-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "uni-flutter";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1298,7 +1298,7 @@
 				CODE_SIGN_ENTITLEMENTS = HBuilder/HBuilder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 100;
-				DEVELOPMENT_TEAM = 8L6XJA6966;
+				DEVELOPMENT_TEAM = 74MNRFPA4K;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1320,7 +1320,7 @@
 				);
 				INFOPLIST_FILE = "HBuilder-Hello/uniPluginFlutter-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "uni-flutter";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+def isOffline = isOfflinePkg.toBoolean() == true
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     buildToolsVersion '30.0.3'
     defaultConfig {
         applicationId "com.itfenbao.uniapp.flutter"
@@ -14,7 +17,17 @@ android {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
+        compileSdkPreview "UpsideDownCake"
     }
+
+    sourceSets {
+        main {
+            if (isOffline) {
+                jniLibs.srcDirs = ['offlineLibs/libs']
+            }
+        }
+    }
+
     signingConfigs {
         config {
             keyAlias 'key0'
@@ -51,6 +64,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.core:core-ktx:+'
     debugImplementation fileTree(dir: 'debugLibs', include: ['*.aar', '*.jar'], exclude: [])
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
     implementation 'androidx.appcompat:appcompat:1.0.0'
@@ -66,7 +80,21 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.12'
     implementation 'com.squareup.okio:okio:1.15.0'
 
-    implementation project(':sn_flutter')
+    if (isOffline) {
+        implementation fileTree(dir: 'offlineLibs', include: ['*.aar'], exclude: [])
+        implementation fileTree(dir: 'offlineLibs/libs', include: ['*.jar'], exclude: [])
+        // flutter_embedding.jar 需要
+        implementation 'androidx.lifecycle:lifecycle-common:2.2.0'
+        implementation 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
+        implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
+        implementation 'androidx.fragment:fragment:1.1.0'
+        implementation 'androidx.annotation:annotation:1.1.0'
+        implementation 'androidx.tracing:tracing:1.0.0'
+        implementation 'androidx.core:core:1.6.0'
+        implementation 'androidx.window:window-java:1.0.0-beta04'
+    } else {
+        implementation project(':sn_flutter')
+    }
 
 }
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/itfenbao/fvm/versions/stable"
+export "FLUTTER_ROOT=/Users/itfenbao/fvm/versions/3.7.5"
 export "FLUTTER_APPLICATION_PATH=/Users/itfenbao/AndroidStudioProjects/flutter-in-uniapp/flutter"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib/main.dart"
