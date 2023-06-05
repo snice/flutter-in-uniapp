@@ -1,8 +1,11 @@
 package com.itfenbao.android.flutter;
 
+import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.itfenbao.android.flutter.plugin.SnFlutterProxy;
 
@@ -11,6 +14,7 @@ import java.util.Map;
 
 import io.flutter.Log;
 import io.flutter.embedding.android.FlutterFragment;
+import io.flutter.embedding.android.FlutterView;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.FlutterEngineCache;
 import io.flutter.embedding.engine.plugins.util.GeneratedPluginRegister;
@@ -70,6 +74,12 @@ public class SnFlutterFragment extends FlutterFragment implements IMessage, Meth
         if (!TextUtils.isEmpty(instanceId)) {
             MsgDispatcher.getInstance().addMessageChannel(instanceId, this);
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        FlutterView fv = view.findViewById(FLUTTER_VIEW_ID);
+        if (fv != null) fv.requestApplyInsets();
     }
 
     @Override
