@@ -2,6 +2,7 @@ package com.itfenbao.android.flutter.plugin;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import io.dcloud.feature.uniapp.ui.component.AbsVContainer;
 import io.dcloud.feature.uniapp.ui.component.UniComponent;
 import io.dcloud.feature.uniapp.ui.component.UniComponentProp;
 import io.flutter.embedding.android.FlutterFragment;
+import io.flutter.embedding.android.RenderMode;
 import io.flutter.embedding.engine.FlutterEngineCache;
 
 public class SnFlutterComponent extends UniComponent<FrameLayout> implements Destroyable, SnFlutterFragment.UniComponentFireEvent {
@@ -76,7 +78,9 @@ public class SnFlutterComponent extends UniComponent<FrameLayout> implements Des
 
     @Override
     protected FrameLayout initComponentHostView(@NonNull Context context) {
-        return new FrameLayout(context);
+        FrameLayout view = new FrameLayout(context);
+        view.setId(View.generateViewId());
+        return view;
     }
 
     @Override
@@ -87,9 +91,9 @@ public class SnFlutterComponent extends UniComponent<FrameLayout> implements Des
 
     private void initFlutter(int viewId) {
         if (!TextUtils.isEmpty(cacheId) && FlutterEngineCache.getInstance().get(cacheId) != null) {
-            mFragment = new FlutterFragment.CachedEngineFragmentBuilder(SnFlutterFragment.class, cacheId).build();
+            mFragment = new FlutterFragment.CachedEngineFragmentBuilder(SnFlutterFragment.class, cacheId).renderMode(RenderMode.texture).build();
         } else {
-            mFragment = new FlutterFragment.NewEngineFragmentBuilder(SnFlutterFragment.class).dartEntrypoint(entryPoint).initialRoute(initialRoute).build();
+            mFragment = new FlutterFragment.NewEngineFragmentBuilder(SnFlutterFragment.class).dartEntrypoint(entryPoint).initialRoute(initialRoute).renderMode(RenderMode.texture).build();
         }
         mFragment.setCacheId(cacheId);
         mFragment.setInitialRoute(initialRoute);
