@@ -31,6 +31,7 @@ import io.flutter.embedding.engine.FlutterEngineCache;
 public class SnFlutterComponent extends UniComponent<FrameLayout> implements Destroyable, SnFlutterFragment.UniComponentFireEvent {
 
     private static final String ENTRY_POINT = "entryPoint";
+    private static final String RENDER_MODE = "renderMode";
     private static final String INITIAL_ROUTE = "initialRoute";
     private static final String PARAMS = "params";
     public static final String DESTROY_AFTER_BACK = "destroyAfterBack";
@@ -38,6 +39,7 @@ public class SnFlutterComponent extends UniComponent<FrameLayout> implements Des
     private String instanceId;
     private String cacheId;
     private String entryPoint = "main";
+    private String renderMode = "texture";
     private String initialRoute;
     private boolean destroyAfterBack = true;
     private Map<String, Object> initParams = new HashMap();
@@ -57,6 +59,9 @@ public class SnFlutterComponent extends UniComponent<FrameLayout> implements Des
     private void init(AbsAttr attr) {
         if (attr.containsKey(ENTRY_POINT)) {
             entryPoint = attr.get(ENTRY_POINT).toString();
+        }
+        if (attr.containsKey(RENDER_MODE)) {
+            renderMode = attr.get(RENDER_MODE).toString();
         }
         if (attr.containsKey(INITIAL_ROUTE)) {
             initialRoute = attr.get(INITIAL_ROUTE).toString();
@@ -90,10 +95,11 @@ public class SnFlutterComponent extends UniComponent<FrameLayout> implements Des
     }
 
     private void initFlutter(int viewId) {
+        RenderMode mode = RenderMode.valueOf(renderMode);
         if (!TextUtils.isEmpty(cacheId) && FlutterEngineCache.getInstance().get(cacheId) != null) {
-            mFragment = new FlutterFragment.CachedEngineFragmentBuilder(SnFlutterFragment.class, cacheId).renderMode(RenderMode.texture).build();
+            mFragment = new FlutterFragment.CachedEngineFragmentBuilder(SnFlutterFragment.class, cacheId).renderMode(mode).build();
         } else {
-            mFragment = new FlutterFragment.NewEngineFragmentBuilder(SnFlutterFragment.class).dartEntrypoint(entryPoint).initialRoute(initialRoute).renderMode(RenderMode.texture).build();
+            mFragment = new FlutterFragment.NewEngineFragmentBuilder(SnFlutterFragment.class).dartEntrypoint(entryPoint).initialRoute(initialRoute).renderMode(mode).build();
         }
         mFragment.setCacheId(cacheId);
         mFragment.setInitialRoute(initialRoute);
@@ -123,6 +129,24 @@ public class SnFlutterComponent extends UniComponent<FrameLayout> implements Des
         if (mFragment != null) {
             mFragment.popRoute();
         }
+    }
+
+    @UniJSMethod
+    public void hide() {
+        if (mFragment == null) return;
+        mFragment.onPause();
+        FragmentActivity fragmentActivity = (FragmentActivity) getInstance().getContext();
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+        fragmentManager.beginTransaction().hide(mFragment).commit();
+    }
+
+    @UniJSMethod
+    public void show() {
+        if (mFragment == null) return;
+        FragmentActivity fragmentActivity = (FragmentActivity) getInstance().getContext();
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+        fragmentManager.beginTransaction().show(mFragment).commit();
+        mFragment.onResume();
     }
 
     @Override
