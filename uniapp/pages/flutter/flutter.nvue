@@ -1,6 +1,7 @@
 <template>
-	<sn-flutter-view ref="flutter" :instanceId="instanceId" :entryPoint="entryPoint" :initialRoute="initialRoute"
-		:params="params" destroyAfterBack="true" @pop="onPop" @popChange="onPopChange" style="flex:1;" />
+	<sn-flutter-view ref="flutter" renderMode="surface" :instanceId="instanceId" :entryPoint="entryPoint"
+		:initialRoute="initialRoute" :params="params" destroyAfterBack="true" @pop="onPop" @popChange="onPopChange"
+		style="flex:1;" />
 </template>
 
 <script>
@@ -25,6 +26,14 @@
 				return true;
 			}
 		},
+		onShow() {
+			console.log('flutter show')
+			this.$refs.flutter && this.$refs.flutter.show()
+		},
+		onHide() {
+			console.log("flutter hide")
+			this.$refs.flutter && this.$refs.flutter.hide();
+		},
 		onLoad() {
 			this.methodChannel = new MethodChannel(this.instanceId);
 			this.methodChannel.$on('test', e => {
@@ -40,6 +49,12 @@
 					});
 				}
 			});
+			// setTimeout(() => {
+			// 	uni.navigateTo({
+			// 		// animationType: 'none',
+			// 		url: '/pages/login/login'
+			// 	})
+			// }, 5 * 1000);
 		},
 		methods: {
 			onPop() {

@@ -3,8 +3,10 @@ export class MethodChannel {
 		this.msgHandlers = new Map();
 		this.instanceId = arg;
 		this.flutter = uni.requireNativePlugin('sn-flutter');
-		const self = this
-		plus.globalEvent.addEventListener('flutter_message' + '&' + this.instanceId, function(e) {
+		const self = this;
+		const eventName = 'flutter_message' + '&' + this.instanceId;
+		plus.globalEvent.removeEventListener(eventName);
+		plus.globalEvent.addEventListener(eventName, function(e) {
 			if (self.msgHandlers.has(e.method)) {
 				self.msgHandlers.get(e.method).call(self, e.params);
 			}

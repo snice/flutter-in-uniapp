@@ -1,0 +1,33 @@
+{
+  "name": "webf",
+  "version": "0.14.0",
+  "summary": "Build flutter apps with HTML/CSS and JavaScript.",
+  "description": "WebF (Web on Flutter) is a W3C standards-compliant web rendering engine based on Flutter, allowing web applications to run natively on Flutter.",
+  "homepage": "https://openwebf.com",
+  "license": {
+    "file": "../LICENSE"
+  },
+  "authors": {
+    "OpenWebF": "dongtiangche@outlook.com"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": "Classes/**/*",
+  "public_header_files": "Classes/**/*.h",
+  "dependencies": {
+    "Flutter": [
+
+    ]
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "prepare_command": "bash prepare.sh",
+  "vendored_frameworks": "Frameworks/*.xcframework",
+  "resources": "Frameworks/*.*",
+  "pod_target_xcconfig": {
+    "DEFINES_MODULE": "YES",
+    "VALID_ARCHS[sdk=iphonesimulator*]": "x86_64"
+  }
+}

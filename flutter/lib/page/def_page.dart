@@ -19,14 +19,23 @@ class MyApp extends StatelessWidget {
           return Scaffold(
               body: Center(
                   child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("hello, Flutter."),
+              Text("hello, Flutter."),
+              Text("hello, Flutter."),
+              Text(MediaQuery.of(context).padding.top.toString()),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, "/second");
                 },
                 child: const Text('Go Second'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  uniapp.$emit("test", {"a": 1});
+                },
+                child: const Text('打开uniMP小程序'),
               )
             ],
           )));

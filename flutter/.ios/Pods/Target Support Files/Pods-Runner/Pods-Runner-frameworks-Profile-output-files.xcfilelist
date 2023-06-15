@@ -1,0 +1,6 @@
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/connectivity_plus.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/shared_preferences_foundation.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/webf.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/quickjs.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/webf_bridge.framework

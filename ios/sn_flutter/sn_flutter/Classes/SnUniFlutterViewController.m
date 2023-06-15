@@ -89,8 +89,7 @@
     }];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+- (void)destroy {
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     if (instanceId) {
         [[SnUniMsgDispatcher share] removeMsgProtol:instanceId];
@@ -102,9 +101,22 @@
     }
 }
 
-//- (void)dealloc {
-//    NSLog(@"page dealloc");
-//}
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    [super didMoveToParentViewController:parent];
+    // pop时,销毁
+    if(parent == nil) {
+        [self destroy];
+    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    [self destroy];
+}
+
+- (void)dealloc {
+    NSLog(@"page dealloc");
+}
 
 - (void)postMessage:(NSString *)methodName params:(NSDictionary *)params {
     [channel invokeMethod:methodName arguments:params];

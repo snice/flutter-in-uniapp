@@ -1,0 +1,51 @@
+PODS:
+  - connectivity_plus (0.0.1):
+    - Flutter
+    - ReachabilitySwift
+  - Flutter (1.0.0)
+  - FlutterPluginRegistrant (0.0.1):
+    - connectivity_plus
+    - Flutter
+    - shared_preferences_foundation
+    - webf
+  - ReachabilitySwift (5.0.0)
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - webf (0.14.0):
+    - Flutter
+
+DEPENDENCIES:
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - Flutter (from `Flutter`)
+  - FlutterPluginRegistrant (from `Flutter/FlutterPluginRegistrant`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - webf (from `.symlinks/plugins/webf/ios`)
+
+SPEC REPOS:
+  trunk:
+    - ReachabilitySwift
+
+EXTERNAL SOURCES:
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
+  Flutter:
+    :path: Flutter
+  FlutterPluginRegistrant:
+    :path: Flutter/FlutterPluginRegistrant
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+  webf:
+    :path: ".symlinks/plugins/webf/ios"
+
+SPEC CHECKSUMS:
+  connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  FlutterPluginRegistrant: 314adbbea224da79d587c0f98fad06b30d54b9a3
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
+  webf: 904888515f25428e7f769866541e3c453da9cbee
+
+PODFILE CHECKSUM: f23cdaf6df7581c877bdc345e211b5b99c6b6f59
+
+COCOAPODS: 1.12.1

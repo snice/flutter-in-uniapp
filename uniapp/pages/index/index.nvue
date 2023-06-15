@@ -8,14 +8,45 @@
 </template>
 
 <script>
+	import {
+		MethodChannel
+	} from '@/js_sdk/flutter/flutter.js';
+	const mp = uni.requireNativePlugin('uniMP');
+	var mainFlutter;
 	export default {
 		data() {
-			return {};
+			return {
+				appId: '__UNI__ACFF79C'
+			};
 		},
-		onLoad() {},
+		onLoad() {
+			mp.getUniMPVersion(this.appId, (ret) => {
+				if (ret.code != 0) {
+					mp.installUniMP({
+						appid: this.appId,
+						wgtFile: '/static/__UNI__ACFF79C.wgt'
+					}, (ret) => {
+						console.log('installUniMP: ' + JSON.stringify(ret));
+					});
+				}
+			});
+		},
+		onShow() {
+			console.log('show')
+		},
 		methods: {
 			openFlutter() {
+				const instanceId = "mainF"
+				mainFlutter = new MethodChannel(instanceId);
+				mainFlutter.$on('test', e => {
+					console.log('test', e);
+					mp.openUniMP({
+						appid: '__UNI__ACFF79C',
+						openMode: 'push'
+					});
+				})
 				uni.$flutter.openFlutter({
+					instanceId: instanceId,
 					entryPoint: 'main'
 				})
 			},

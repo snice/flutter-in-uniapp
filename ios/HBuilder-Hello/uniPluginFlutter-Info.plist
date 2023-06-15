@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIFileSharingEnabled</key>
-	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
@@ -332,7 +330,11 @@ WindSDK.xcframework</string>
 		</dict>
 	</array>
 	<key>UIBackgroundModes</key>
-	<array/>
+	<array>
+		<string>audio</string>
+	</array>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UILaunchImages</key>
 	<array>
 		<dict>
@@ -608,29 +610,29 @@ WindSDK.xcframework</string>
 	<true/>
 	<key>dcloud_uniplugins</key>
 	<array>
-        <dict>
-            <key>hooksClass</key>
-            <string>SnUniFlutterProxy</string>
-            <key>plugins</key>
-            <array>
-                <dict>
-                    <key>class</key>
-                    <string>SnUniFlutterModule</string>
-                    <key>name</key>
-                    <string>sn-flutter</string>
-                    <key>type</key>
-                    <string>module</string>
-                </dict>
-                <dict>
-                    <key>class</key>
-                    <string>SnUniFlutterComponent</string>
-                    <key>name</key>
-                    <string>sn-flutter-view</string>
-                    <key>type</key>
-                    <string>component</string>
-                </dict>
-            </array>
-        </dict>
+		<dict>
+			<key>hooksClass</key>
+			<string>SnUniFlutterProxy</string>
+			<key>plugins</key>
+			<array>
+				<dict>
+					<key>class</key>
+					<string>SnUniFlutterModule</string>
+					<key>name</key>
+					<string>sn-flutter</string>
+					<key>type</key>
+					<string>module</string>
+				</dict>
+				<dict>
+					<key>class</key>
+					<string>SnUniFlutterComponent</string>
+					<key>name</key>
+					<string>sn-flutter-view</string>
+					<key>type</key>
+					<string>component</string>
+				</dict>
+			</array>
+		</dict>
 	</array>
 	<key>getui</key>
 	<dict>
